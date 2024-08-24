@@ -10,18 +10,19 @@ type Props = {
 
 const useClickOutside = ({ ref, parent, handleOnClickOutside }: Props) => {
   useEffect(() => {
+    const currParent = parent.current;
     const listener = (event: MouseEvent | TouchEvent) => {
       if (!ref.current || ref.current.contains(event.target as Node)) {
         return;
       }
       handleOnClickOutside(event);
     };
-    parent.current?.addEventListener("mousedown", listener);
-    parent.current?.addEventListener("touchstart", listener);
+    currParent?.addEventListener("mousedown", listener);
+    currParent?.addEventListener("touchstart", listener);
 
     return () => {
-      parent.current?.removeEventListener("mousedown", listener);
-      parent.current?.removeEventListener("touchstart", listener);
+      currParent?.removeEventListener("mousedown", listener);
+      currParent?.removeEventListener("touchstart", listener);
     };
   }, [ref, parent, handleOnClickOutside]);
 
