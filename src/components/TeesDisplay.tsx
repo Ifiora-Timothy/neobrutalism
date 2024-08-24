@@ -5,7 +5,10 @@ import ItemCard from "./ItemCard";
 type Props = {};
 
 const TeesDisplay = async () => {
-  const tees = await fetch(`${process.env.NEXT_PUBLIC_URL}/api`, {
+  const url = process.env.NEXT_PUBLIC_URL;
+  console.log({ url });
+
+  const tees = await fetch(`${url}/api`, {
     method: "GET",
     cache: "default",
   });

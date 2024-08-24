@@ -7,7 +7,10 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 const ShopWrapper = async ({ searchParams }: Props) => {
-  const tees = await fetch(`${process.env.NEXT_PUBLIC_URL}/api`, {
+  const url = process.env.NEXT_PUBLIC_URL;
+  console.log({ url });
+
+  const tees = await fetch(`${url}/api`, {
     method: "GET",
     cache: "default",
   });
