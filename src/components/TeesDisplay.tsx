@@ -1,12 +1,11 @@
 import { shirt } from "@/app/(otherPages)/shop/page";
 import React from "react";
 import ItemCard from "./ItemCard";
-import { ImageMap } from "@/data";
 
 type Props = {};
 
 const TeesDisplay = async () => {
-  const tees = await fetch("http://localhost:3000/api", {
+  const tees = await fetch(`${process.env.NEXT_PUBLIC_URL}/api`, {
     method: "GET",
     cache: "default",
   });

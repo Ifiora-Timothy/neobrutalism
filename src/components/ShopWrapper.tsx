@@ -7,7 +7,7 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 const ShopWrapper = async ({ searchParams }: Props) => {
-  const tees = await fetch("http://localhost:3000/api", {
+  const tees = await fetch(`${process.env.NEXT_PUBLIC_URL}/api`, {
     method: "GET",
     cache: "default",
   });
