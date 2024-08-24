@@ -9,6 +9,7 @@ type Props = {
 const ShopWrapper = async ({ searchParams }: Props) => {
   const url = process.env.NEXT_PUBLIC_URL;
   console.log({ url });
+  console.log({ url3: process.env.VERCEL_PROJECT_PRODUCTION_URL });
 
   const tees = await fetch(`${url}/api`, {
     method: "GET",
