@@ -11,7 +11,7 @@ const ShopWrapper = async ({ searchParams }: Props) => {
   console.log({ url });
   console.log({ url3: process.env.VERCEL_PROJECT_PRODUCTION_URL });
 
-  const tees = await fetch(`${url}/api`, {
+  const tees = await fetch(`api`, {
     method: "GET",
     cache: "default",
   });
