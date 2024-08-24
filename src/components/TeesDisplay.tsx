@@ -9,13 +9,10 @@ const TeesDisplay = async () => {
   console.log({ url });
   console.log({ url3: process.env.VERCEL_PROJECT_PRODUCTION_URL });
   console.log("ENCS", process.env.VERCEL_URL);
-  const tees = await fetch(
-    `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/api`,
-    {
-      method: "GET",
-      cache: "default",
-    }
-  );
+  const tees = await fetch(`${url}/api`, {
+    method: "GET",
+    cache: "default",
+  });
   const homeDisplayShirt: shirt[] = await tees.json();
 
   const shirts: shirt[] = homeDisplayShirt.slice(0, 4);
