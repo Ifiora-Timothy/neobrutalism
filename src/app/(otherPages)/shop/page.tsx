@@ -1,6 +1,7 @@
 import FilterandSort from "@/components/FilterandSort";
 import ViewModeToggle from "@/components/ViewModeToggle";
 import ShopWrapper from "@/components/ShopWrapper";
+import { Suspense } from "react";
 
 export type shirt = {
   id: number;
@@ -96,38 +97,6 @@ type Props = {
 };
 
 export default function Shop({ searchParams }: Props) {
-  // const [priceRange, setPriceRange] = useState([0, 50]);
-  // const [sortBy, setSortBy] = useState("popularity");
-  // const [sortOrder, setSortOrder] = useState("desc");
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [viewMode, setViewMode] = useState<"grid2" | "list">("list"); // 'grid3', 'grid2', or 'list'
-  // const [isFilterOpen, setIsFilterOpen] = useState(false);
-
-  // const itemsPerPage = 6;
-
-  // const filteredAndSortedShirts = shirts
-  //   .filter(
-  //     (shirt) => shirt.price >= priceRange[0] && shirt.price <= priceRange[1]
-  //   )
-  //   .sort((a, b) => {
-  //     if (sortBy === "price") {
-  //       return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
-  //     } else {
-  //       return sortOrder === "asc" ? a.likes - b.likes : b.likes - a.likes;
-  //     }
-  //   });
-
-  // const pageCount = Math.ceil(filteredAndSortedShirts.length / itemsPerPage);
-  // const displayedShirts = filteredAndSortedShirts.slice(
-  //   (currentPage - 1) * itemsPerPage,
-  //   currentPage * itemsPerPage
-  // );
-
-  // const gridClass =
-  //   viewMode === "grid2"
-  //     ? "grid-cols-2 md:grid-cols-3"
-  //     : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3";
-
   return (
     <div className="max-w-7xl mx-auto sm:px-4 py-8">
       <h1 className="sm:text-5xl text-xl md:text-7xl font-black mb-12 transform -rotate-2 text-center bg-purple-600 text-white p-4 border-8 border-black shadow-[8px_8px_0_0_#000]">
@@ -135,9 +104,13 @@ export default function Shop({ searchParams }: Props) {
       </h1>
 
       {/* Mobile Filter Toggle Button */}
-      <FilterandSort />
+      <Suspense fallback={<div>Loading filter</div>}>
+        <FilterandSort />
+      </Suspense>
       {/* View Mode Toggles */}
-      <ViewModeToggle />
+      <Suspense fallback={<div>Loading ViewModeToggle</div>}>
+        <ViewModeToggle />
+      </Suspense>
 
       {/* Product Grid */}
       <ShopWrapper searchParams={searchParams} />

@@ -1,6 +1,7 @@
 import { shirt } from "@/app/(otherPages)/shop/page";
 import Pagination from "./Pagination";
 import ItemCard from "./ItemCard";
+import { Suspense } from "react";
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -55,7 +56,9 @@ const ShopWrapper = async ({ searchParams }: Props) => {
           />
         ))}
       </div>
-      <Pagination itemsNumber={filteredAndSortedShirts.length} />
+      <Suspense fallback={<div>Loading</div>}>
+        <Pagination itemsNumber={filteredAndSortedShirts.length} />
+      </Suspense>
     </>
   );
 };
