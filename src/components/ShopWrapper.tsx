@@ -11,10 +11,13 @@ const ShopWrapper = async ({ searchParams }: Props) => {
   console.log({ url });
   console.log({ url3: process.env.VERCEL_PROJECT_PRODUCTION_URL });
 
-  const tees = await fetch(`${url}/api`, {
-    method: "GET",
-    cache: "default",
-  });
+  const tees = await fetch(
+    `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/api`,
+    {
+      method: "GET",
+      cache: "default",
+    }
+  );
   const shirts: shirt[] = await tees.json();
   const priceRange = (searchParams.pricerange as string | undefined)
     ?.split("-")
