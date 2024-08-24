@@ -2,20 +2,14 @@ import { shirt } from "@/app/(otherPages)/shop/page";
 import Pagination from "./Pagination";
 import ItemCard from "./ItemCard";
 import { Suspense } from "react";
+import { getShirt } from "@/app/actions/GetShirts";
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 const ShopWrapper = async ({ searchParams }: Props) => {
-  const url = process.env.NEXT_PUBLIC_URL;
-  console.log({ url });
-  console.log({ url3: process.env.VERCEL_PROJECT_PRODUCTION_URL });
-
-  const tees = await fetch(`api`, {
-    method: "GET",
-    cache: "default",
-  });
-  const shirts: shirt[] = await tees.json();
+  const tees = await getShirt();
+  const shirts: shirt[] = await JSON.parse(tees);
   const priceRange = (searchParams.pricerange as string | undefined)
     ?.split("-")
     .map(Number) ?? [0, 50];

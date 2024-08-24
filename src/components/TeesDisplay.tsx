@@ -1,19 +1,13 @@
 import { shirt } from "@/app/(otherPages)/shop/page";
 import React from "react";
 import ItemCard from "./ItemCard";
+import { getShirt } from "@/app/actions/GetShirts";
 
 type Props = {};
 
 const TeesDisplay = async () => {
-  const url = process.env.NEXT_PUBLIC_URL;
-  console.log({ url });
-  console.log({ url3: process.env.VERCEL_PROJECT_PRODUCTION_URL });
-  console.log("ENCS", process.env.VERCEL_URL);
-  const tees = await fetch(`${url}/api`, {
-    method: "GET",
-    cache: "default",
-  });
-  const homeDisplayShirt: shirt[] = await tees.json();
+  const tees = await getShirt();
+  const homeDisplayShirt: shirt[] = await JSON.parse(tees);
 
   const shirts: shirt[] = homeDisplayShirt.slice(0, 4);
   console.log({ shirts });
