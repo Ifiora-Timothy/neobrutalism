@@ -5,72 +5,8 @@ import React, { useEffect, useRef, useState } from "react";
 type Props = {};
 
 const FeaturesContainer = (props: Props) => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const animationFrameId = useRef<number | null>(null);
-
-  // Scroll speed in pixels per second
-  const scrollSpeed: number = 30;
-
-  // State to manage whether scrolling is active or paused
-  const [isScrolling, setIsScrolling] = useState<boolean>(true);
-
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    let lastTimestamp: number | null = null;
-    console.log("container", container, { isScrolling });
-
-    // Auto-scroll function
-    const autoScroll = (timestamp: number) => {
-      if (!container || !isScrolling) return;
-
-      if (lastTimestamp === null) {
-        lastTimestamp = timestamp;
-      }
-
-      const deltaTime: number = (timestamp - lastTimestamp) / 1000;
-      lastTimestamp = timestamp;
-
-      const distance: number = scrollSpeed * deltaTime;
-      container.scrollLeft += distance;
-
-      if (
-        container.scrollLeft >=
-        container.scrollWidth - container.clientWidth
-      ) {
-        container.scrollLeft = 0;
-      }
-      animationFrameId.current = requestAnimationFrame(autoScroll);
-    };
-
-    if (isScrolling) {
-      animationFrameId.current = requestAnimationFrame(autoScroll);
-    }
-
-    return () => {
-      if (animationFrameId.current !== null) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
-      // Clean up function to prevent memory leaks
-    };
-  }, [isScrolling]);
-
-  // Event handlers to pause and resume scrolling
-  const handleMouseEnter = () => {
-    console.log("mouse enter");
-
-    setIsScrolling(false);
-  };
-
-  const handleMouseLeave = () => {
-    setIsScrolling(true);
-  };
-
   return (
     <div
-      ref={scrollContainerRef}
-      onMouseEnter={handleMouseEnter}
-      onTouchStart={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       style={{
         scrollbarWidth: "none",
         // scrollbarGutter: "0",

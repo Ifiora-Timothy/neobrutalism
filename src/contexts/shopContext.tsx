@@ -2,18 +2,19 @@
 
 import { Dispatch, PropsWithChildren, createContext, useState } from "react";
 
-type cartItem = {
+export type cartItem = {
   id: number;
   name: string;
   price: number;
-  color: string;
+  color: "black" | "blue" | "white";
   likes: number;
   description: string;
+  size: "S" | "M" | "L" | "XL";
   quantity: number;
 };
 type ShopContextType = {
   cart: cartItem[];
-  addtoCart: (item: Omit<cartItem, "quantity">) => void;
+  addtoCart: (item: cartItem) => void;
   removefromCart: (id: number) => void;
   toggleWishlist: (item: Omit<cartItem, "quantity">) => void;
   removeFromWishlist: (id: number) => void;
@@ -49,7 +50,7 @@ export const ShopProvider = ({ children }: PropsWithChildren) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
 
-  const addtoCart = (shirt: Omit<cartItem, "quantity">) => {
+  const addtoCart = (shirt: cartItem) => {
     setCart((prev) => {
       const existingItem = prev.find((item) => item.id === shirt.id);
       if (existingItem) {
@@ -92,7 +93,7 @@ export const ShopProvider = ({ children }: PropsWithChildren) => {
   const addWishToCart = (id: number) => {
     const item = wishlist.find((item) => item.id === id);
     if (item) {
-      addtoCart(item);
+      addtoCart({ ...item, quantity: 1 });
       removeFromWishlist(id);
       setIsCartOpen(true);
     }

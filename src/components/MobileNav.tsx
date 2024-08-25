@@ -38,10 +38,12 @@ const MobileNav = ({ navItems, setMobileMenuOpen }: Props) => {
             {item.name}
           </Link>
         ))}
-        <Button className="w-full mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded border-4 border-black">
-          <ShoppingCartIcon className="inline-block mr-2 h-5 w-5" />
-          Cart ({cart.length})
-        </Button>
+        <Link href="/cart" onClick={() => setMobileMenuOpen(false)}>
+          <Button className="w-full mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded border-4 border-black">
+            <ShoppingCartIcon className="inline-block mr-2 h-5 w-5" />
+            Cart ({cart.length})
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -8,7 +8,16 @@ export async function getShirt() {
   console.log({ entered: "true" });
 
   const data = AllShirts;
-  console.log({ data });
+
+  return JSON.stringify(data);
+}
+
+export async function getSingleShirt(id: string) {
+  //const searchParams = request.nextUrl.searchParams;
+  //const query = searchParams.get("query");
+  console.log({ entered: "true" });
+
+  const data = AllShirts.find((shirt) => shirt.id === Number(id));
 
   return JSON.stringify(data);
 }

@@ -29,7 +29,7 @@ export default function RootLayout({
           "w-screen bg-yellow-100 overflow-x-hidden"
         )}
       >
-        <div className="min-h-screen relative w-full bg-yellow-100 font-mono text-black">
+        <div className="min-h-screen bg-[#ffc080] relative w-full bg-yelow-100 flex flex-col font-mono text-black">
           <ShopProvider>
             <header className=" sticky top-0 z-50">
               <Navbar />
@@ -40,7 +40,7 @@ export default function RootLayout({
               <CartOverlay />{" "}
             </main>
           </ShopProvider>
-          <footer className="bg-black text-white p-4 text-center">
+          <footer className="bg-black mt-auto text-white p-4 text-center">
             <p className="sm:text-lg text-xs font-bold">
               &copy; 2024 TECH FEST SHIRTS | ALL RIGHTS RESERVED
             </p>

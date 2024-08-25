@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PlusIcon, MinusIcon, TrashIcon } from "lucide-react";
@@ -9,29 +8,6 @@ import Image from "next/image";
 import useShopContext from "@/hooks/useShopContext";
 
 // Mock data for cart items
-const initialCartItems = [
-  {
-    id: 1,
-    name: "Neon Explosion Tee",
-    price: 29.99,
-    quantity: 2,
-    image: "/placeholder.svg?height=100&width=100&text=Neon+Tee",
-  },
-  {
-    id: 2,
-    name: "Bass Drop Hoodie",
-    price: 49.99,
-    quantity: 1,
-    image: "/placeholder.svg?height=100&width=100&text=Bass+Hoodie",
-  },
-  {
-    id: 3,
-    name: "General Admission Ticket",
-    price: 99.99,
-    quantity: 1,
-    image: "/placeholder.svg?height=100&width=100&text=GA+Ticket",
-  },
-];
 
 export default function Cart() {
   const { cart, updateQuantity, removefromCart } = useShopContext();
@@ -43,8 +19,9 @@ export default function Cart() {
   const tax = subtotal * 0.1; // Assuming 10% tax
   const total = subtotal + tax;
 
+  console.log(`/shirt${cart[0]?.id}${cart[0]?.color}.png`);
   return (
-    <div className="max-w-6xl mx-auto sm:px-4 py-12">
+    <div className="max-w-9xl  mx-auto sm:px-4 py-12">
       <h1 className="sm:text-7xl text-4xl font-black mb-12 transform -rotate-2 text-center bg-purple-600 text-white p-6 border-8 border-black shadow-[12px_12px_0_0_#000]">
         YOUR CART
       </h1>
@@ -60,23 +37,25 @@ export default function Cart() {
         </div>
       ) : (
         <>
-          <div className="grid gap-8 sm:grid-cols-2 grid-cols-1 mb-12">
+          <div className="grid gap-8 lg:grid-cols-2 grid-cols-1 mb-12">
             {cart.map((item) => (
               <div
                 key={item.id}
                 className="bg-white p-6 border-8 border-black shadow-[12px_12px_0_0_#000] hover:shadow-[20px_20px_0_0_#000] transition-all duration-300"
               >
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                  <div className="flex items-center gap-4">
-                    <Image
-                      src="/car2sm.jpg"
-                      alt={item.name}
-                      width="96"
-                      height="96"
-                      className="w-24 object-fill h-24 border-4 border-black"
-                    />
-                    <div>
-                      <h2 className="sm:text-2xl text-lg font-bold">
+                <div className="flex w-full flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                  <div className="flex  items-center w-full gap-4  h-24 ">
+                    <div className="w-24 bg-green-300 p-3 border-4 border-black">
+                      <Image
+                        src={`/store/shirt${item.id}${item.color}.png`}
+                        alt={item.name}
+                        width="96"
+                        height="96"
+                        className="size-full object-fill "
+                      />
+                    </div>
+                    <div className="w-fit">
+                      <h2 className="sm:text-2xl  text-lg font-bold">
                         {item.name}
                       </h2>
                       <p className="text-xl font-bold">

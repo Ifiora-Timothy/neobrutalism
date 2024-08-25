@@ -11,7 +11,7 @@ const AddToCartBtn = ({ viewMode, shirt }: Props) => {
   const { addtoCart } = useShopContext();
   return (
     <Button
-      onClick={() => addtoCart(shirt)}
+      onClick={() => addtoCart({ ...shirt, color: "black", size: "M" })}
       className={clsx(
         "flex-1  md:text-xl  bg-red-500 hover:bg-red-600 text-white font-bold transform transition-all duration-200 hover:scale-105 border-2 md:border-4 border-black",
         {

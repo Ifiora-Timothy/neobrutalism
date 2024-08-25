@@ -3,6 +3,7 @@ import Pagination from "./Pagination";
 import ItemCard from "./ItemCard";
 import { Suspense } from "react";
 import { getShirt } from "@/app/actions/GetShirts";
+import EmptyFilter from "./EmptyFilter";
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -45,15 +46,21 @@ const ShopWrapper = async ({ searchParams }: Props) => {
       : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
   return (
     <>
-      <div className={`grid ${gridClass} gap-4 md:gap-8 mb-12`}>
-        {displayedShirts.map((shirt) => (
-          <ItemCard
-            viewMode={viewMode as "list" | "grid2"}
-            shirt={shirt}
-            key={shirt.id}
-          />
-        ))}
-      </div>
+      {displayedShirts.length > 0 ? (
+        <div className={`grid ${gridClass} gap-4 md:gap-8 mb-12`}>
+          {displayedShirts.map((shirt) => (
+            <ItemCard
+              viewMode={viewMode as "list" | "grid2"}
+              shirt={shirt}
+              key={shirt.id}
+            />
+          ))}{" "}
+        </div>
+      ) : (
+        <div className="w-full    flex justify-center">
+          <EmptyFilter />
+        </div>
+      )}
       <Suspense fallback={<div>Loading</div>}>
         <Pagination itemsNumber={filteredAndSortedShirts.length} />
       </Suspense>

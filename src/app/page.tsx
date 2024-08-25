@@ -19,7 +19,7 @@ export default function Home() {
             <h1 className="text-[34px] w-full text-center mt-8 text-nowrap fot-sans  md:text-7xl font-black mb-8 text-white mix-blend-difference">
               TECH FUSION FEST
             </h1>
-            <p className="text-lg m-8 mt-0  md:px-16  md:text-4xl font-bold mb-8 bg-black text-white p-4 inline-block transform -rotate-2">
+            <p className="text-lg  m-8 mt-0  md:px-16  md:text-4xl font-bold mb-8 bg-black text-white p-4 inline-block transform -rotate-2">
               3 DAYS OF PURE MADNESS!
             </p>
           </div>
@@ -27,14 +27,14 @@ export default function Home() {
             <FeaturesContainer />
           </div>
           <div className="flex flex-wrap gap-4 px-8 md:px-16 ">
-            <Link href="/tickets">
-              <Button className="text-2xl gap-2 sm:py-4 py-6 px-8 bg-red-500 hover:bg-red-600 text-white font-black border-4 border-black shadow-[8px_8px_0_0_#000] hover:shadow-[12px_12px_0_0_#000] transition-all duration-300 transform hover:-translate-y-1">
-                GET TICKETS <FaLongArrowAltRight />
-              </Button>
-            </Link>
             <Link href="/shop">
               <Button className="text-2xl sm:py-4 py-6  gap-2 px-8 bg-cyan-400 hover:bg-cyan-500 text-black font-black border-4 border-black shadow-[8px_8px_0_0_#000] hover:shadow-[12px_12px_0_0_#000] transition-all duration-300 transform hover:-translate-y-1">
                 SHOP MERCH <FaLongArrowAltRight />
+              </Button>
+            </Link>
+            <Link href="/tickets">
+              <Button className="text-2xl gap-2 sm:py-4 py-6 px-8 bg-red-500 hover:bg-red-600 text-white font-black border-4 border-black shadow-[8px_8px_0_0_#000] hover:shadow-[12px_12px_0_0_#000] transition-all duration-300 transform hover:-translate-y-1">
+                GET TICKETS <FaLongArrowAltRight />
               </Button>
             </Link>
           </div>
