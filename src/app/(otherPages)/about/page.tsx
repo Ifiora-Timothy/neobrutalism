@@ -7,18 +7,19 @@ export default function About() {
       <div className="bg-cyan-400 sm:p-8 p-4 border-8 border-black shadow-[12px_12px_0_0_#000]">
         <p className="sm:text-2xl text-lg mb-6 leading-relaxed bg-yellow-300 p-4 border-4 border-black">
           Our festival is a mind-bending explosion of music, art, and pure
-          chaos! For three days, we'll be turning the world upside down with the
-          most outrageous performances, mind-melting visuals, and earth-shaking
-          beats you've ever experienced.
+          chaos! For three days, we&apos;ll be turning the world upside down
+          with the most outrageous performances, mind-melting visuals, and
+          earth-shaking beats you&apos;ve ever experienced.
         </p>
         <p className="sm:text-2xl text-lg mb-6 leading-relaxed bg-pink-400 p-4 border-4 border-black">
-          But it's not just about the music - it's about YOU! Grab one of our
-          custom festival shirts and become part of the madness. Each shirt is a
-          wearable piece of art that screams "I survived the insanity!"
+          But it&apos;s not just about the music - it&apos;s about YOU! Grab one
+          of our custom festival shirts and become part of the madness. Each
+          shirt is a wearable piece of art that screams &quot;I survived the
+          insanity!&quot;
         </p>
         <p className="sm:text-2xl text-lg font-bold bg-green-400 p-4 border-4 border-black">
-          Don't miss out on the event of the millennium. Get your shirt, get
-          weird, and let's make some memories!
+          Don&apos;t miss out on the event of the millennium. Get your shirt,
+          get weird, and let&apos;s make some memories!
         </p>
       </div>
     </div>

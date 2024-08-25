@@ -14,7 +14,7 @@ export default function EmptyFilter() {
           Looks like your filter settings are too hardcore!
         </p>
         <p className="text-sm sm:text-lg mb-7">
-          We couldn't find any products matching your current filters. Try
+          We couldn&apos;t find any products matching your current filters. Try
           adjusting your search or check out our full collection!
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-6">
