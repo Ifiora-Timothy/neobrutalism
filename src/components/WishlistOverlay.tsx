@@ -54,7 +54,9 @@ const WishlistOverlay = (props: Props) => {
               <h3 className="text-xl font-bold">{item.name}</h3>
               <p className="text-lg">${item.price}</p>
               <Button
-                onClick={() => addtoCart({ ...item, color: "black" })}
+                onClick={() =>
+                  addtoCart({ ...item, color: "black", size: "M", quantity: 1 })
+                }
                 className="mt-2 bg-green-500 hover:bg-green-600 text-white"
               >
                 Add to Cart
