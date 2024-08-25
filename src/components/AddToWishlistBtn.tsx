@@ -19,9 +19,9 @@ const AddToWishlistBtn = ({ shirt }: Props) => {
           ? "bg-pink-500 hover:bg-pink-600"
           : "bg-gray-300 hover:bg-gray-400"
       }`}
-      onClick={() => toggleWishlist(shirt)}
+      onClick={() => toggleWishlist({ ...shirt, size: "M", color: "black" })}
     >
-      <HeartIcon className="w-4 h-4 md:w-6 md:w-6" />
+      <HeartIcon className="w-4 h-4 md:w-6" />
     </Button>
   );
 };
