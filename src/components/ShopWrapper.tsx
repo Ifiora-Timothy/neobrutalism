@@ -1,9 +1,9 @@
-import { shirt } from "@/app/(otherPages)/shop/page";
 import Pagination from "./Pagination";
 import ItemCard from "./ItemCard";
 import { Suspense } from "react";
 import { getShirt } from "@/app/actions/GetShirts";
 import EmptyFilter from "./EmptyFilter";
+import type { shirt } from "@/app/(otherPages)/shop/page";
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
