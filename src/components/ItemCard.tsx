@@ -51,12 +51,12 @@ const ItemCard = ({ shirt, viewMode }: Props) => {
             blurDataURL={shirt.images[color]}
             src={shirt.images[color]}
             alt={shirt.name}
-            className="w-[200px] h-auto mb-4 bordr-2 md:borer-4 border-black"
+            className="w-[170px] h-auto mb-4 bordr-2 md:borer-4 border-black"
           />
         </div>
       </Link>
       <h2
-        className={clsx("md:text-3xl font-bold mb-2", {
+        className={clsx("md:text-2xl font-bold mb-2", {
           "text-xl ": viewMode === "list",
           "text-sm ": viewMode === "grid2",
         })}
