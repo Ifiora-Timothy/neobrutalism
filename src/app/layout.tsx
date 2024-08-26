@@ -11,7 +11,7 @@ import WishlistOverlay from "@/components/WishlistOverlay";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "E-Commerce Neobutalism project",
+  title: "E-commerce Neobrutalism Project",
   description:
     "Solved a major challenge developers face in state management, which is the question on when to store state in the url and when to store  in-memory.  Designed and developed by Techdoc",
   metadataBase: new URL("https://weekly-issue3-neobrutalism.vercel.app"),
