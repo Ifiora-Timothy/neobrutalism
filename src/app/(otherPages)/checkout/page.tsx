@@ -1,16 +1,12 @@
-"use client";
-
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CreditCardIcon, TruckIcon, LockIcon } from "lucide-react";
-import clsx from "clsx";
+
+import PaymentMethod from "@/components/PaymentMethod";
+import PlaceOrderBtn from "@/components/PlaceOrderBtn";
+import OrderSummary from "@/components/OrderSummary";
 
 export default function Checkout() {
-  const [paymentMethod, setPaymentMethod] = useState("credit");
-
   // Mock cart data
   const cartItems = [
     { id: 1, name: "Neon Explosion Tee", price: 29.99, quantity: 2 },
@@ -49,6 +45,7 @@ export default function Checkout() {
                   </Label>
                   <Input
                     id="firstName"
+                    placeholder="John"
                     className="border-4 bg-yellow-100 border-black sm:text-xl text-sm"
                   />
                 </div>
@@ -60,6 +57,7 @@ export default function Checkout() {
                     Last Name
                   </Label>
                   <Input
+                    placeholder="Doe"
                     id="lastName"
                     className="border-4 bg-yellow-100 border-black sm:text-xl text-sm"
                   />
@@ -74,6 +72,7 @@ export default function Checkout() {
                 </Label>
                 <Input
                   id="address"
+                  placeholder="tech street 123"
                   className="border-4 bg-yellow-100 border-black sm:text-xl text-sm"
                 />
               </div>
@@ -87,6 +86,7 @@ export default function Checkout() {
                   </Label>
                   <Input
                     id="city"
+                    placeholder="San Francisco"
                     className="border-4 bg-yellow-100 border-black sm:text-xl text-sm"
                   />
                 </div>
@@ -99,6 +99,7 @@ export default function Checkout() {
                   </Label>
                   <Input
                     id="zipCode"
+                    placeholder="94102"
                     className="border-4 bg-yellow-100 border-black sm:text-xl text-sm"
                   />
                 </div>
@@ -110,81 +111,7 @@ export default function Checkout() {
             <h2 className="sm:text-3xl text-xl font-bold mb-4">
               2. PAYMENT METHOD
             </h2>
-            <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
-              <div className="flex items-center space-x-2 mb-2">
-                <RadioGroupItem
-                  value="credit"
-                  id="credit"
-                  className={clsx("border-4  border-black", {
-                    "bg-yellow-100": paymentMethod === "credit",
-                  })}
-                />
-                <Label
-                  htmlFor="credit"
-                  className="sm:text-xl text-sm font-bold"
-                >
-                  Credit Card
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem
-                  value="paypal"
-                  id="paypal"
-                  className={clsx("border-4  border-black", {
-                    "bg-yellow-100": paymentMethod === "paypal",
-                  })}
-                />
-                <Label
-                  htmlFor="paypal"
-                  className="sm:text-xl text-sm font-bold"
-                >
-                  PayPal
-                </Label>
-              </div>
-            </RadioGroup>
-            {paymentMethod === "credit" && (
-              <div className="mt-4 grid gap-4">
-                <div>
-                  <Label
-                    htmlFor="cardNumber"
-                    className="sm:text-xl text-sm font-bold"
-                  >
-                    Card Number
-                  </Label>
-                  <Input
-                    id="cardNumber"
-                    className="border-4 border-black sm:text-xl text-sm"
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label
-                      htmlFor="expiry"
-                      className="sm:text-xl text-sm font-bold"
-                    >
-                      Expiry Date
-                    </Label>
-                    <Input
-                      id="expiry"
-                      placeholder="MM/YY"
-                      className="border-4 border-black text-xl"
-                    />
-                  </div>
-                  <div>
-                    <Label
-                      htmlFor="cvv"
-                      className="sm:text-xl text-sm font-bold"
-                    >
-                      CVV
-                    </Label>
-                    <Input
-                      id="cvv"
-                      className="border-4 border-black sm:text-xl text-sm"
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
+            <PaymentMethod />
           </div>
         </div>
 
@@ -193,48 +120,10 @@ export default function Checkout() {
             <h2 className="sm:text-3xl text-xl font-bold mb-4">
               ORDER SUMMARY
             </h2>
-            {cartItems.map((item) => (
-              <div
-                key={item.id}
-                className="flex justify-between items-center mb-2"
-              >
-                <span className="sm:text-xl text-sm">
-                  {item.name} x{item.quantity}
-                </span>
-                <span className="sm:text-xl text-sm font-bold">
-                  ${(item.price * item.quantity).toFixed(2)}
-                </span>
-              </div>
-            ))}
-            <div className="border-t-4 border-black mt-4 pt-4">
-              <div className="flex justify-between items-center mb-2">
-                <span className="sm:text-xl text-sm">Subtotal</span>
-                <span className="sm:text-xl text-sm font-bold">
-                  ${subtotal.toFixed(2)}
-                </span>
-              </div>
-              <div className="flex justify-between items-center mb-2">
-                <span className="sm:text-xl text-sm">Tax</span>
-                <span className="sm:text-xl text-sm font-bold">
-                  ${tax.toFixed(2)}
-                </span>
-              </div>
-              <div className="flex justify-between items-center mb-2">
-                <span className="sm:text-xl text-sm">Shipping</span>
-                <span className="sm:text-xl text-sm font-bold">
-                  ${shipping.toFixed(2)}
-                </span>
-              </div>
-              <div className="flex justify-between items-center mt-4 sm:text-2xl text-base font-bold">
-                <span>Total</span>
-                <span>${total.toFixed(2)}</span>
-              </div>
-            </div>
+            <OrderSummary />
           </div>
 
-          <Button className="w-full text-2xl py-6 bg-red-500 hover:bg-red-600 text-white font-bold transform transition-all duration-200 hover:scale-105 border-4 border-black">
-            PLACE ORDER
-          </Button>
+          <PlaceOrderBtn />
 
           <div className="mt-8 text-center">
             <div className="flex justify-center items-start gap-2 mb-2">

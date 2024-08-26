@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Toaster } from "sonner";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
 import { ShopProvider } from "@/contexts/shopContext";
@@ -46,6 +45,7 @@ export default function RootLayout({
             </p>
           </footer>
         </div>
+        <Toaster />
       </body>
     </html>
   );

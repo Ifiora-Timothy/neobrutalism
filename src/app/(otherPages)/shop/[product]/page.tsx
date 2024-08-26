@@ -25,7 +25,7 @@ export default async function ProductPage({ params, searchParams }: Props) {
         <ArrowLeftIcon className="mr-2" /> Back to Shop
       </Link>
 
-      <div className="grid grid-cols-5 gap-8 bg justify-center items-center">
+      <div className="grid grid-cols-5 gap-8 bg justify-center items-center sm:items-start">
         <div className="col-[1/6] md:col-span-2">
           <div className="mb-4 p-4 bg-pink-300 border-8 border-black overflow-hidden">
             <Image

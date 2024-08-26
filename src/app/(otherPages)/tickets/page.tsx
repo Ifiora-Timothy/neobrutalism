@@ -6,9 +6,14 @@ import { Input } from "@/components/ui/input";
 import { LuCrown, LuZap, LuTicket, LuMinus, LuPlus } from "react-icons/lu";
 import { IconType } from "react-icons";
 import { MinusIcon, MoveRight, PlusIcon } from "lucide-react";
+import useShopContext from "@/hooks/useShopContext";
+import { cartItem } from "@/contexts/shopContext";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import NeobrutallistInfotoast from "@/components/NeobrutallistInfotoast";
 
 type TicketType = {
-  id: 1 | 2 | 3;
+  id: 101 | 102 | 103;
   name: string;
   price: number;
   color: string;
@@ -17,7 +22,7 @@ type TicketType = {
 };
 const ticketTypes: TicketType[] = [
   {
-    id: 1,
+    id: 101,
     name: "GENERAL ADMISSION",
     price: 99.99,
     color: "bg-yellow-400",
@@ -25,7 +30,7 @@ const ticketTypes: TicketType[] = [
     description: "Access to all main stages and general festival areas.",
   },
   {
-    id: 2,
+    id: 102,
     name: "VIP EXPERIENCE",
     price: 199.99,
     color: "bg-purple-500",
@@ -34,7 +39,7 @@ const ticketTypes: TicketType[] = [
       "VIP lounge access, premium viewing areas, and exclusive merch.",
   },
   {
-    id: 3,
+    id: 103,
     name: "ULTIMATE FEST PASS",
     price: 299.99,
     color: "bg-red-500",
@@ -45,9 +50,14 @@ const ticketTypes: TicketType[] = [
 ];
 
 export default function Tickets() {
-  const [quantities, setQuantities] = useState({ 1: 0, 2: 0, 3: 0 });
+  const [quantities, setQuantities] = useState({ 101: 0, 102: 0, 103: 0 });
+  const selectedTickets = ticketTypes.filter(
+    (ticket) => quantities[ticket.id] > 0
+  );
+  const { addtoCart, removefromCart } = useShopContext();
+  const router = useRouter();
 
-  const updateQuantity = (id: 1 | 2 | 3, delta: number) => {
+  const updateQuantity = (id: 101 | 102 | 103, delta: number) => {
     setQuantities((prev) => ({
       ...prev,
       [id]: Math.max(0, prev[id] + delta),
@@ -58,6 +68,36 @@ export default function Tickets() {
     (sum, ticket) => sum + ticket.price * quantities[ticket.id],
     0
   );
+
+  const proceedCheckout = () => {
+    //toast an info if no tickets are added
+    if (total === 0) {
+      toast(
+        <NeobrutallistInfotoast
+          description="Please select one or multiple tiket before checking out."
+          title="Hey! wait a minute."
+        />,
+        {
+          duration: 2000,
+        }
+      );
+    }
+
+    //add tickets to cart
+    const ticketsToAdd: cartItem[] = selectedTickets.map((ticket) => ({
+      id: ticket.id,
+      name: ticket.name,
+      price: ticket.price,
+      color: ticket.color as "black" | "blue" | "white",
+      likes: 0,
+      description: ticket.description,
+      size: "S",
+      quantity: quantities[ticket.id],
+    }));
+    //if tickets already added to cart, remove them first
+    selectedTickets.forEach((ticket) => removefromCart(ticket.id));
+    ticketsToAdd.forEach((ticket) => addtoCart(ticket));
+  };
 
   return (
     <div className="max-w-6xl mx-auto sm:px-4  py-12">
@@ -118,7 +158,10 @@ export default function Tickets() {
           TOTAL: ${total.toFixed(2)}
         </h2>
         <p className="text-xl mb-4">Ready to experience the madness?</p>
-        <Button className="w-fit max-w-full gap-2 sm:text-2xl text-sm py-6 bg-red-500 hover:bg-red-600 text-white font-bold transform transition-all duration-200 hover:scale-105 border-4 border-black">
+        <Button
+          onClick={proceedCheckout}
+          className="w-fit max-w-full gap-2 sm:text-2xl text-sm py-6 bg-red-500 hover:bg-red-600 text-white font-bold transform transition-all duration-200 hover:scale-105 border-4 border-black"
+        >
           PROCEED TO CHECKOUT
         </Button>
       </div>

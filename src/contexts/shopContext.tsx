@@ -58,7 +58,7 @@ export const ShopProvider = ({ children }: PropsWithChildren) => {
           item.id === shirt.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       } else {
-        return [...prev, { ...shirt, quantity: 1 }];
+        return [...prev, { ...shirt, quantity: shirt.quantity ?? 1 }];
       }
     });
     setIsCartOpen(true);

@@ -3,8 +3,6 @@ import React from "react";
 import ItemCard from "./ItemCard";
 import { getShirt } from "@/app/actions/GetShirts";
 
-type Props = {};
-
 const TeesDisplay = async () => {
   const tees = await getShirt();
   const homeDisplayShirt: shirt[] = await JSON.parse(tees);

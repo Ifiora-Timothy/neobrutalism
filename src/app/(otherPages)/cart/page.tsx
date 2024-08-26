@@ -47,7 +47,7 @@ export default function Cart() {
                   <div className="flex  items-center w-full gap-4  h-24 ">
                     <div className="w-24 bg-green-300 p-3 border-4 border-black">
                       <Image
-                        src={`/store/shirt${item.id}${item.color}.png`}
+                        src={`/store/shirt${item.id % 8}${item.color}.png`}
                         alt={item.name}
                         width="96"
                         height="96"

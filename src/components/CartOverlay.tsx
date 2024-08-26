@@ -69,8 +69,19 @@ const CartOverlay = (props: Props) => {
               .toFixed(2)}
           </div>
           <Link href="/checkout">
-            <Button className="w-full mt-4 bg-green-500 hover:bg-green-600 text-white text-xl py-4 border-4 border-black">
+            <Button
+              onClick={closeCart}
+              className="w-full mt-4 bg-green-500 hover:bg-green-600 text-white text-xl py-4 border-4 border-black"
+            >
               Checkout
+            </Button>
+          </Link>
+          <Link href="/shop">
+            <Button
+              onClick={closeCart}
+              className="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white text-xl py-4 border-4 border-black"
+            >
+              Continue Shopping
             </Button>
           </Link>
         </div>
