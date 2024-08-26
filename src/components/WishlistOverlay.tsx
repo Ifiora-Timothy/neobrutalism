@@ -13,7 +13,6 @@ const WishlistOverlay = (props: Props) => {
 
   const { isWishlistOpen, closeWishlist, wishlist, addtoCart } =
     useShopContext();
-  console.log({ isWishlistOpen, wishlist });
 
   useClickOutside({
     ref: childRef,

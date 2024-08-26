@@ -7,10 +7,9 @@ import type { shirt } from "@/app/(otherPages)/shop/page";
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
+  shirts: shirt[];
 };
-const ShopWrapper = async ({ searchParams }: Props) => {
-  const tees = await getShirt();
-  const shirts: shirt[] = await JSON.parse(tees);
+const ShopWrapper = async ({ searchParams, shirts }: Props) => {
   const priceRange = (searchParams.pricerange as string | undefined)
     ?.split("-")
     .map(Number) ?? [0, 50];
@@ -24,6 +23,29 @@ const ShopWrapper = async ({ searchParams }: Props) => {
   const currentPage = page ? Number(page) : 1;
 
   const itemsPerPage = 6;
+  console.log(priceRange[0], priceRange[1], "hello");
+
+  console.log(shirts.map((shirt) => shirt.price));
+  console.log(
+    shirts
+      .filter(
+        (shirt) => shirt.price >= priceRange[0] && shirt.price <= priceRange[1]
+      )
+      .sort((a, b) => {
+        if (sortBy === "price") {
+          return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+        } else {
+          return sortOrder === "asc" ? a.likes - b.likes : b.likes - a.likes;
+        }
+      })
+      .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+  );
+  console.log(
+    "hello",
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   const filteredAndSortedShirts = shirts
     .filter(
       (shirt) => shirt.price >= priceRange[0] && shirt.price <= priceRange[1]

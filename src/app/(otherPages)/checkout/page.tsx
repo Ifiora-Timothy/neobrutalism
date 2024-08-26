@@ -5,23 +5,9 @@ import { CreditCardIcon, TruckIcon, LockIcon } from "lucide-react";
 import PaymentMethod from "@/components/PaymentMethod";
 import PlaceOrderBtn from "@/components/PlaceOrderBtn";
 import OrderSummary from "@/components/OrderSummary";
+import { Suspense } from "react";
 
 export default function Checkout() {
-  // Mock cart data
-  const cartItems = [
-    { id: 1, name: "Neon Explosion Tee", price: 29.99, quantity: 2 },
-    { id: 2, name: "Bass Drop Hoodie", price: 49.99, quantity: 1 },
-    { id: 3, name: "General Admission Ticket", price: 99.99, quantity: 1 },
-  ];
-
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
-  const tax = subtotal * 0.1; // Assuming 10% tax
-  const shipping = 9.99;
-  const total = subtotal + tax + shipping;
-
   return (
     <div className="max-w-6xl mx-auto sm:px-4 py-12">
       <h1 className="sm:text-7xl text-4xl font-black mb-12 transform -rotate-2 text-center bg-green-500 text-black p-6 border-8 border-black shadow-[12px_12px_0_0_#000]">
@@ -120,7 +106,9 @@ export default function Checkout() {
             <h2 className="sm:text-3xl text-xl font-bold mb-4">
               ORDER SUMMARY
             </h2>
-            <OrderSummary />
+            <Suspense fallback={<div>Loading Order Summary</div>}>
+              <OrderSummary />
+            </Suspense>
           </div>
 
           <PlaceOrderBtn />

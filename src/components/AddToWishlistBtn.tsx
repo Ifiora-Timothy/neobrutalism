@@ -11,7 +11,6 @@ type Props = {
 const AddToWishlistBtn = ({ shirt }: Props) => {
   const { wishlist, toggleWishlist, isWishlistOpen } = useShopContext();
 
-  console.log({ isWishlistOpen });
   return (
     <Button
       className={`p-2 md:p-4 border-2 md:border-4 border-black ${

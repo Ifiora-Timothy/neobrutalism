@@ -10,7 +10,6 @@ type Props = {
 
 const ItemImage = ({ name, images }: Props) => {
   const { color } = use(colorContext);
-  console.log({ color });
 
   return (
     <Image
