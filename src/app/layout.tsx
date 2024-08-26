@@ -57,7 +57,14 @@ export default function RootLayout({
               <CartOverlay />{" "}
             </main>
           </ShopProvider>
-          <footer className="bg-black mt-auto text-white p-4 text-center">
+          <footer className="bg-black flex-col gap-2 flex items-center justify-center mt-auto text-white p-4 text-center">
+            <a
+              target="_blank"
+              href="https://bento.me/ifiora-timothy"
+              className="text-red-200"
+            >
+              View my portfolio
+            </a>{" "}
             <p className="sm:text-lg text-xs font-bold">
               &copy; 2024 TECH FEST SHIRTS | ALL RIGHTS RESERVED
             </p>
