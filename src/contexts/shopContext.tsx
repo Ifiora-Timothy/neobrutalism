@@ -1,6 +1,12 @@
 "use client";
 
-import { Dispatch, PropsWithChildren, createContext, useState } from "react";
+import {
+  Dispatch,
+  PropsWithChildren,
+  createContext,
+  useEffect,
+  useState,
+} from "react";
 
 export type cartItem = {
   id: number;
@@ -52,48 +58,73 @@ export const ShopProvider = ({ children }: PropsWithChildren) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
 
+  useEffect(() => {
+    const carlL = JSON.parse(localStorage.getItem("cart") ?? "[]");
+    const wishL = JSON.parse(localStorage.getItem("wishlist") ?? "[]");
+    setCart(carlL);
+    setWishlist(wishL);
+  }, []);
   const addtoCart = (shirt: cartItem) => {
     setCart((prev) => {
       const existingItem = prev.find((item) => item.id === shirt.id);
       if (existingItem) {
-        return prev.map((item) =>
+        const newCart = prev.map((item) =>
           item.id === shirt.id ? { ...item, quantity: item.quantity + 1 } : item
         );
+        localStorage.setItem("cart", JSON.stringify(newCart));
+        return newCart;
       } else {
-        return [...prev, { ...shirt, quantity: shirt.quantity ?? 1 }];
+        const newCart = [...prev, { ...shirt, quantity: shirt.quantity ?? 1 }];
+        localStorage.setItem("cart", JSON.stringify(newCart));
+        return newCart;
       }
     });
     setIsCartOpen(true);
   };
   const clearCart = () => {
     setCart([]);
+    localStorage.setItem("cart", JSON.stringify([]));
   };
 
   const removefromCart = (id: number) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+    setCart((prev) => {
+      const newCart = prev.filter((item) => item.id !== id);
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      return newCart;
+    });
   };
   const toggleWishlist = (shirt: Omit<cartItem, "quantity">) => {
     setWishlist((prev) => {
       if (prev.some((item) => item.id === shirt.id)) {
-        return prev.filter((item) => item.id !== shirt.id);
+        const newWish = prev.filter((item) => item.id !== shirt.id);
+        localStorage.setItem("wishlist", JSON.stringify(newWish));
+        return newWish;
       }
       setIsWishlistOpen(true);
+      localStorage.setItem("wishlist", JSON.stringify([...prev, shirt]));
       return [...prev, shirt];
     });
   };
   const removeFromWishlist = (id: number) => {
-    setWishlist((prev) => prev.filter((item) => item.id !== id));
+    setWishlist((prev) => {
+      const newWish = prev.filter((item) => item.id !== id);
+      localStorage.setItem("wishlist", JSON.stringify(newWish));
+      return newWish;
+    });
   };
   const updateQuantity = (id: number, delta: number) => {
-    setCart((prevItems) =>
-      prevItems
+    setCart((prevItems) => {
+      const newCart = prevItems
         .map((item) =>
           item.id === id
             ? { ...item, quantity: Math.max(0, item.quantity + delta) }
             : item
         )
-        .filter((item) => item.quantity > 0)
-    );
+        .filter((item) => item.quantity > 0);
+
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      return newCart;
+    });
   };
   const addWishToCart = (id: number) => {
     const item = wishlist.find((item) => item.id === id);
