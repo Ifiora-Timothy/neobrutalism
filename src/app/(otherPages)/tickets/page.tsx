@@ -79,6 +79,7 @@ export default function Tickets() {
         />,
         {
           duration: 2000,
+          position: "top-right",
         }
       );
     }

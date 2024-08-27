@@ -23,6 +23,7 @@ type ShopContextType = {
   isCartOpen: boolean;
   isWishlistOpen: boolean;
   closeCart: () => void;
+  clearCart: () => void;
   closeWishlist: () => void;
   wishlist: Omit<cartItem, "quantity">[];
   updateQuantity: (id: number, delta: number) => void;
@@ -30,18 +31,19 @@ type ShopContextType = {
 
 export const shopContext = createContext<ShopContextType>({
   cart: [],
-  addtoCart: () => {},
-  removefromCart: () => {},
-  toggleWishlist: () => {},
-  removeFromWishlist: () => {},
-  addWishToCart: () => {},
-  addCartToWishlist: () => {},
+  addtoCart() {},
+  removefromCart() {},
+  toggleWishlist() {},
+  removeFromWishlist() {},
+  addWishToCart() {},
+  addCartToWishlist() {},
   isCartOpen: false,
   isWishlistOpen: false,
-  closeCart: () => {},
-  closeWishlist: () => {},
+  closeCart() {},
+  closeWishlist() {},
   wishlist: [],
-  updateQuantity: () => {},
+  updateQuantity() {},
+  clearCart() {},
 });
 
 export const ShopProvider = ({ children }: PropsWithChildren) => {
@@ -62,6 +64,9 @@ export const ShopProvider = ({ children }: PropsWithChildren) => {
       }
     });
     setIsCartOpen(true);
+  };
+  const clearCart = () => {
+    setCart([]);
   };
 
   const removefromCart = (id: number) => {
@@ -122,6 +127,7 @@ export const ShopProvider = ({ children }: PropsWithChildren) => {
         toggleWishlist,
         removeFromWishlist,
         addWishToCart,
+        clearCart,
         addCartToWishlist,
         updateQuantity,
         isCartOpen,

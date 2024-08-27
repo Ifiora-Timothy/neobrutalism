@@ -2,11 +2,18 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
+import useShopContext from "@/hooks/useShopContext";
+import { useRouter } from "next/navigation";
+import NeobrutallistInfotoast from "./NeobrutallistInfotoast";
+import { MoveRight } from "lucide-react";
 
 type Props = {};
 
 const PlaceOrderBtn = (props: Props) => {
   const [isLoading, setIsLoading] = React.useState(false);
+  const router = useRouter();
+  const { clearCart } = useShopContext();
+  const promiseToastId = "promise";
   return (
     <>
       <Button
@@ -23,9 +30,37 @@ const PlaceOrderBtn = (props: Props) => {
             }).finally(() => setIsLoading(false)),
             {
               loading: "Placing your order...",
-              success: "Order placed successfully!",
-              error: "Failed to place order",
 
+              success: "Order placed successfully!",
+              async onAutoClose(toas) {
+                try {
+                  const resp = await toas.promise;
+                  clearCart();
+                  router.replace("/shop");
+
+                  toast(
+                    <NeobrutallistInfotoast
+                      description="Please take a moment to view my other works!❤️"
+                      title="Hey! wait a minute."
+                    >
+                      <a target="_blank" href="https://bento.me/ifiora-timothy">
+                        <div className="flex gap-2 items-center bg-yellow-400 border-4 border-black px-3 py-1 justify-between w-fit">
+                          My Socials
+                          <MoveRight size={18} />
+                        </div>
+                      </a>
+                    </NeobrutallistInfotoast>,
+                    {
+                      duration: 4000,
+                      position: "top-right",
+                    }
+                  );
+                } catch (err) {
+                  console.error(err);
+                }
+              },
+              error: "Failed to place order",
+              id: promiseToastId,
               unstyled: true,
               position: "top-right",
               classNames: {
@@ -39,7 +74,7 @@ const PlaceOrderBtn = (props: Props) => {
                 success: "neo-brutalist-toast-success",
                 loading: "neo-brutalist-toast-loading",
               },
-              duration: 2000,
+              duration: 1000,
             }
           );
         }}
@@ -51,7 +86,6 @@ const PlaceOrderBtn = (props: Props) => {
       <style jsx global>{`
         li {
           display: flex;
-          alighn-items: center;
         }
         .neo-brutalist-toast {
           font-family: "Arial", sans-serif;

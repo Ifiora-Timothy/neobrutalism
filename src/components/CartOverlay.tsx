@@ -29,7 +29,10 @@ const CartOverlay = (props: Props) => {
         isCartOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      <div className="h-full w-full bg-black bg-opacity-25 backdrop-blur-sm"></div>
+      <div
+        role="button"
+        className="h-full w-full bg-black bg-opacity-25 backdrop-blur-sm"
+      ></div>
       <div
         ref={childRef}
         className={`fixed z-[60] h-full inset-y-0 right-0 w-[80%] md:w-96 bg-yellow-400 border-l-8 border-black  
